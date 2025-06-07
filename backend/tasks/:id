@@ -1,0 +1,11 @@
+app.put('/tasks/:id', async (req, res) => {
+  const updateFields = {};
+  if (req.body.title !== undefined) updateFields.title = req.body.title;
+  if (req.body.completed !== undefined) updateFields.completed = req.body.completed;
+  const updatedTask = await Task.findByIdAndUpdate(
+    req.params.id,
+    updateFields,
+    { new: true }
+  );
+  res.json(updatedTask);
+});
