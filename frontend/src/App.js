@@ -23,7 +23,7 @@ function App() {
   const fetchTasks = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/tasks");
+   const res = await axios.get(`${BACKEND_URL}/tasks`);
       setTasks(res.data);
     } catch (error) {
       alert("Failed to fetch tasks");
@@ -35,7 +35,7 @@ function App() {
     e.preventDefault();
     if (!title.trim()) return;
     try {
-      await axios.post("http://localhost:5000/tasks", { title });
+      await axios.post(`${BACKEND_URL}/tasks`, { title });
       setTitle("");
       fetchTasks();
     } catch (error) {
@@ -45,7 +45,7 @@ function App() {
 
   const toggleTask = async (id, completed) => {
     try {
-      await axios.put(`http://localhost:5000/tasks/${id}`, {
+      await axios.put(`${BACKEND_URL}/tasks/${id}`, {
         completed: !completed,
       });
       fetchTasks();
@@ -56,7 +56,7 @@ function App() {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/tasks/${id}`);
+      await axios.delete(`${BACKEND_URL}/tasks/${id}`);
       fetchTasks();
     } catch (error) {
       alert("Failed to delete task");
@@ -75,7 +75,7 @@ function App() {
   const saveEdit = async (task) => {
     if (!editingValue.trim()) return;
     try {
-      await axios.put(`http://localhost:5000/tasks/${task._id}`, {
+      await axios.put(`${BACKEND_URL}/tasks/${task._id}`, {
         title: editingValue,
         completed: task.completed,
       });
