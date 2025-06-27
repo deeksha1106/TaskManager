@@ -12,6 +12,9 @@ function App() {
   const [editingId, setEditingId] = useState(null);
   const [editingValue, setEditingValue] = useState("");
 
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
+
   useEffect(() => {
     fetchTasks();
   }, []);
